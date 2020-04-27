@@ -1,0 +1,20 @@
+label {
+	
+	display:block;
+	width:100px;
+	hight: 50px;
+	float: center;
+}
+
+input {
+	
+	margin: 0px;
+}
+
+div {
+	
+	background-color: green;
+  	width: 100px;
+  	border: px solid black;
+ 	float: center;;
+}

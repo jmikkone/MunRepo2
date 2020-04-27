@@ -1,0 +1,29 @@
+label {
+	
+	display:block;
+	width:100px;
+	hight: 50px;
+	float: center;
+}
+
+input {
+	
+	margin: 1px;
+}
+
+th1 {
+	
+	display: block;
+	background-color: green;
+  	width: 100px;
+  	border: px solid black;
+ 	
+}
+
+th2 {
+	display: block;
+	background-color: green;
+  	width: 200px;
+  	margin-border: px solid black;
+ 	
+}

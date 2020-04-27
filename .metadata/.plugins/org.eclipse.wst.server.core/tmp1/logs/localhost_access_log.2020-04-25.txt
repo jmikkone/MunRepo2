@@ -1,0 +1,2 @@
+127.0.0.1 - - [25/Apr/2020:21:37:31 +0300] "GET / HTTP/1.1" 404 709
+0:0:0:0:0:0:0:1 - - [25/Apr/2020:21:37:35 +0300] "GET /Asiakkaat/WEB-INF/classes/model/dao/Dao.java HTTP/1.1" 404 682

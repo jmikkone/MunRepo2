@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;lista.HenkiloOhjelma&apos; to &apos;HenkiloListaOhjelma&apos;&#x0D;&#x0A;- Original project: &apos;Oma harjoittelu&apos;&#x0D;&#x0A;- Original element: &apos;lista.HenkiloOhjelma&apos;&#x0D;&#x0A;- Renamed element: &apos;lista.HenkiloListaOhjelma&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;HenkiloOhjelma&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;lista{HenkiloOhjelma.java[HenkiloOhjelma" matchStrategy="1" name="HenkiloListaOhjelma" qualified="false" references="true" similarDeclarations="false" stamp="1583842222144" textual="false" version="1.0"/>
+</session>

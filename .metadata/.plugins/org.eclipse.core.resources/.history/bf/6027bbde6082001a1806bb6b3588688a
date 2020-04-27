@@ -1,0 +1,54 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"  import="java.util.Calendar" import="java.util.concurrent.ScheduledExecutorService" 
+     import="java.util.concurrent.ScheduledThreadPoolExecutor"
+     import="java.util.concurrent.Executors" import="java.util.concurrent.TimeUnit" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<script src="Scripts/main.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<title>Käyttäjän tiedot</title>
+</head>
+<body>
+<h3>Käyttäjän tiedot</h3>
+
+<% 
+
+String eNimi=request.getParameter("eNimi");
+
+String sNimi=request.getParameter("sNimi");
+
+String sPosti=request.getParameter("sPosti");
+
+String puhNro=request.getParameter("puh");
+
+String syntVuosi=request.getParameter("syntA");
+
+int syntV=Integer.parseInt(syntVuosi);
+
+int nytVuosi=Calendar.getInstance().get(Calendar.YEAR);
+
+int ika=nytVuosi-syntV;
+
+if (ika>= 18){
+	
+	out.print("Etunimi on "+eNimi+"<br>");
+	out.print("Sukunimi on "+sNimi+"<br>");
+	out.print("Sähköpostiosoite on "+sPosti+"<br>");
+	out.print("Puhelinnumero on "+puhNro+"<br>");
+	out.print("Ikä on "+ ika);
+
+}
+else {
+	
+	out.print("Alaikäinen");
+	
+	response.setHeader("Refresh","5;url=Kysy.jsp");
+	
+}
+%>
+
+
+</body>
+</html>

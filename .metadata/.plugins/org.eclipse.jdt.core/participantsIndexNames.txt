@@ -1,0 +1,15 @@
+INDEX VERSION 1.131
+C:\Users\Jodi\eclipse-workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\4182368009.index
+\MalliratkaisutO2\src
+C:\Users\Jodi\eclipse-workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\559097465.index
+\OmaEka\src
+C:\Users\Jodi\eclipse-workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\4103283445.index
+\Kommunikaatio\src
+C:\Users\Jodi\eclipse-workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2056538068.index
+\DWPtoka\src
+C:\Users\Jodi\eclipse-workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\563941866.index
+\MalliratkaisutO2\src
+C:\Users\Jodi\eclipse-workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2993656568.index
+\Asiakkaat\src
+C:\Users\Jodi\eclipse-workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3922106694.index
+\Kommunikaatio\src

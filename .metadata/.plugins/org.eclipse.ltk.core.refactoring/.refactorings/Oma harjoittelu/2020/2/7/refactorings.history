@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move package &apos;merkkijono&apos; to &apos;Malliratkaisut/src&apos;&#x0D;&#x0A;- Original project: &apos;Oma harjoittelu&apos;&#x0D;&#x0A;- Destination element: &apos;Malliratkaisut/src&apos;&#x0D;&#x0A;- Original element: &apos;Oma harjoittelu/src/merkkijono&apos;&#x0D;&#x0A;- Update references to refactored element" description="Move package" destination="=Malliratkaisut/src" element1="/src&lt;merkkijono" flags="589830" fragments="1" id="org.eclipse.jdt.ui.move" policy="org.eclipse.jdt.ui.movePackages" stamp="1581436770019" version="1.0"/>
+</session>

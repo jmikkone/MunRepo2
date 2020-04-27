@@ -1,0 +1,12 @@
+label {
+	
+	display:block;
+	width:100px;
+	hight: 50px;
+	float: center;
+}
+
+input {
+	
+	margin: 0px;
+}

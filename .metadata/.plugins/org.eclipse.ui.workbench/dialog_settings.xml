@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="ImportExportAction">
+		<item key="ImportExportPage.STORE_SELECTED_IMPORT_WIZARD_ID" value="org.eclipse.ui.wizards.import.ZipFile"/>
+		<item key="ImportExportPage.STORE_SELECTED_EXPORT_WIZARD_ID" value="org.eclipse.ui.wizards.export.ZipFile"/>
+		<list key="ImportExportPage.STORE_EXPANDED_IMPORT_CATEGORIES">
+			<item value="org.eclipse.ui.Basic"/>
+		</list>
+		<list key="ImportExportPage.STORE_EXPANDED_EXPORT_CATEGORIES">
+			<item value="org.eclipse.ui.Basic"/>
+		</list>
+	</section>
+	<section name="ZipFileImportWizard">
+		<item key="WizardZipFileResourceImportPage1.STORE_OVERWRITE_EXISTING_RESOURCES_ID" value="false"/>
+		<list key="WizardZipFileResourceImportPage1.STORE_SOURCE_NAMES_ID">
+			<item value="C:\Users\Jodi\Documents\Ohjelmointi 2\viikko 4\listaaautot.zip"/>
+			<item value="C:\Users\Jodi\Documents\Ohjelmointi 2\viikko 4\haeautot.zip"/>
+			<item value="C:\Users\Jodi\Documents\Ohjelmointi 2\Myynti1.zip"/>
+			<item value="C:\Users\Jodi\Documents\Ohjelmointi 2\kaksitasoinen_ohjelma.zip"/>
+			<item value="C:\Users\Jodi\Documents\Ohjelmointi 2\viikko 2. Tietokantaohjelmoinnin perusteet\Viikkotehtävät 2\Palautettavat 2\Myynti.zip"/>
+			<item value="C:\Users\Jodi\Documents\Ohjelmointi 2\viikkko 1. Map, periytyminen ja JUnit-yksikkötestaus\Viikko tehtävät\Palauettavat 1\etatehtavat_1.zip"/>
+			<item value="C:\Users\Jodi\Documents\Ohjelmointi 2\viikkko 1. Map, periytyminen ja JUnit-yksikkötestaus\Viikko tehtävät\Palauettavat 1\Etatehtavat_1.zip"/>
+			<item value="C:\Users\Jodi\Documents\Ohjelmointi 1\Materiaalit viikko 7 Lista\Mallivastaukset7\listaLuokassa.zip"/>
+			<item value="C:\Users\Jodi\Documents\Ohjelmointi 1\Materiaalit viikko 7 Lista\Mallivastaukset7\lista.zip"/>
+			<item value="C:\Users\Jodi\Documents\Ohjelmointi 1\Materiaalit viikko 7\lista.zip"/>
+			<item value="C:\Users\Jodi\Documents\Ohjelmointi 1\Materiaalit viikko 6 Yhteyssuhde\Malliratkaisut 6\yhteyssuhde.zip"/>
+			<item value="C:\Users\Jodi\Documents\Ohjelmointi 1\Materiaalit viikko 5\Malliratkaisut5\luokka.zip"/>
+			<item value="C:\Users\Jodi\Documents\Ohjelmointi 1\Materiaalit viikko 4 taulukko, poikkeus, päivämäärä\Malliratkaisut4\taulukko.zip"/>
+			<item value="C:\Users\Jodi\Documents\Ohjelmointi 1\Materiaalit viikko 3 metodi\Malliratkaisut 3\metodi.zip"/>
+			<item value="C:\Users\Jodi\Documents\Ohjelmointi 1\Materiaalit viikko 2b merkkijono\Mallivastaukset 2b\merkkijono.zip"/>
+			<item value="C:\Users\Jodi\Documents\Ohjelmointi 1\Materiaalit viikko 1b valintarakenne\Malliratkaisut1b\valintarakenne.zip"/>
+			<item value="C:\Users\Jodi\Documents\Ohjelmointi 1\Materiaalit viikko 1\Malliratkaisut\perusteita.zip"/>
+		</list>
+	</section>
+	<section name="NewWizardAction">
+		<item key="NewWizardSelectionPage.STORE_SELECTED_ID" value="org.eclipse.jdt.ui.wizards.JavaProjectWizard"/>
+		<list key="NewWizardSelectionPage.STORE_EXPANDED_CATEGORIES_ID">
+		</list>
+	</section>
+	<section name="ZipFileExportWizard">
+		<item key="WizardZipFileResourceExportPage1.STORE_CREATE_STRUCTURE_ID" value="true"/>
+		<item key="WizardZipFileResourceExportPage1.STORE_COMPRESS_CONTENTS_ID" value="true"/>
+		<list key="WizardZipFileResourceExportPage1.STORE_DESTINATION_NAMES_ID">
+			<item value="C:\Users\Jodi\Documents\Ohjelmointi 2\viikko 4\Viikkotehtävä 4\Asiakkaat projekti.zip"/>
+			<item value="C:\Users\Jodi\Documents\Ohjelmointi 2\viikko 3 Dynaaminen internet projekti\Viikkotehtävät 3\Palautettavat 3.zip"/>
+			<item value="C:\Users\Jodi\Documents\Ohjelmointi 2\viikko 2. Tietokantaohjelmoinnin perusteet\Viikkotehtävät 2\palautettavat2.zip"/>
+			<item value="C:\Users\Jodi\Documents\Ohjelmointi 2\viikko 2. Tietokantaohjelmoinnin perusteet\Viikkotehtävät 2\Palautettavat 2\TietokantaYhteysProjekti.zip"/>
+			<item value="C:\Users\Jodi\Documents\Ohjelmointi 2\viikko 2. Tietokantaohjelmoinnin perusteet\Viikkotehtävät 2\Palautettavat 2\TietokantaYhteys_projekti\TietokantaYhteys\src\ohjelma.zip"/>
+			<item value="C:\Users\Jodi\Documents\Ohjelmointi 2\viikko 2. Tietokantaohjelmoinnin perusteet\Viikkotehtävät 2\Palautettavat 2\TietokantaYhteys_projekti.zip"/>
+			<item value="C:\Users\Jodi\Documents\Eclipse_backup\Eclipsen sisalto.zip"/>
+			<item value="C:\Users\Jodi\Documents\Ohjelmointi 2\viikko 2. Tietokantaohjelmoinnin perusteet\Viikkotehtävät 2\Palautettavat 2\Ohjelmointi 2.zip"/>
+			<item value="C:\Users\Jodi\Documents\Ohjelmointi 2\viikko 2. Tietokantaohjelmoinnin perusteet\Viikkotehtävät 2\Palautettavat 2\Myynti.zip"/>
+		</list>
+	</section>
+	<section name="EditorSelectionDialog">
+		<item key="EditorSelectionDialog.STORE_ID_FILE_EXTENSION" value=".sqlite"/>
+		<item key="EditorSelectionDialog.STORE_ID_INTERNAL_EXTERNAL" value="false"/>
+		<item key="EditorSelectionDialog.STORE_ID_DESCR" value="org.eclipse.compare.CompareEditor"/>
+	</section>
+	<section name="WorkbenchPreferenceDialogSettings">
+		<item key="DIALOG_X_ORIGIN" value="500"/>
+		<item key="DIALOG_Y_ORIGIN" value="72"/>
+	</section>
+	<section name="FileSystemImportWizard">
+	</section>
+</section>

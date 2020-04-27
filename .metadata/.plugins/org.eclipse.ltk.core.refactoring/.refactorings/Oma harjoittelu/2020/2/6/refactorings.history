@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;toistorakenne.Ostokset&apos; to &apos;Kassakone&apos;&#x0D;&#x0A;- Original project: &apos;Oma harjoittelu&apos;&#x0D;&#x0A;- Original element: &apos;toistorakenne.Ostokset&apos;&#x0D;&#x0A;- Renamed element: &apos;toistorakenne.Kassakone&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;Ostokset&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;toistorakenne{Ostokset.java[Ostokset" matchStrategy="1" name="Kassakone" qualified="false" references="true" similarDeclarations="false" stamp="1580715957752" textual="false" version="1.0"/>
+</session>

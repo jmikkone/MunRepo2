@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename package &apos;palautettavatO2&apos; to &apos;palautettavatO2_1&apos;&#x0D;&#x0A;- Original project: &apos;Ohjelmointi 2&apos;&#x0D;&#x0A;- Original element: &apos;Ohjelmointi 2/src/palautettavatO2&apos;&#x0D;&#x0A;- Renamed element: &apos;Ohjelmointi 2/src/palautettavatO2_1&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename package &apos;palautettavatO2&apos;" flags="589830" hierarchical="false" id="org.eclipse.jdt.ui.rename.package" input="/src&lt;palautettavatO2" name="palautettavatO2_1" qualified="false" references="true" stamp="1586434204043" textual="false" version="1.0"/>
+</session>

@@ -1,0 +1,6 @@
+package model;
+
+public class Asiakas {
+private String asiakas_id, etunimi, sukunimi, puhelin, sposti;
+
+}

@@ -1,0 +1,30 @@
+label {
+	
+	display:block;
+	width:100px;
+	float:left;
+	margin:10px;
+	
+}
+
+input {
+	
+	margin: 10px;
+}
+
+th1 {
+	
+	
+	background-color: green;
+  	width: 100px;
+  	border: 5px solid black;
+ 	
+}
+
+th {
+	
+	background-color: green;
+  	width: 100px;
+  	margin-border: 1px solid black;
+ 	
+}

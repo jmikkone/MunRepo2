@@ -1,14 +1,15 @@
 package model;
 
 public class Asiakas {
-private String asiakas_id, etunimi, sukunimi, puhelin, sposti;
+private int asiakas_id;
+private String etunimi, sukunimi, puhelin, sposti;
 
 public Asiakas() {
 	super();
 	// TODO Auto-generated constructor stub
 }
 
-public Asiakas(String asiakas_id, String etunimi, String sukunimi, String puhelin, String sposti) {
+public Asiakas(int asiakas_id, String etunimi, String sukunimi, String puhelin, String sposti) {
 	super();
 	this.asiakas_id = asiakas_id;
 	this.etunimi = etunimi;
@@ -17,11 +18,11 @@ public Asiakas(String asiakas_id, String etunimi, String sukunimi, String puheli
 	this.sposti = sposti;
 }
 
-public String getAsiakas_id() {
+public int getAsiakas_id() {
 	return asiakas_id;
 }
 
-public void setAsiakas_id(String asiakas_id) {
+public void setAsiakas_id(int asiakas_id) {
 	this.asiakas_id = asiakas_id;
 }
 

@@ -17,12 +17,12 @@ import model.dao.Dao;
 
 /**
  * Servlet implementation class Asiakkaat
- */
-@WebServlet("/asiakkaat") //frontEndiss‰ viitataan t‰h‰n kohtaan kun haetaan backEndist‰ tietoja
+ *///miksi vastausvideolla /asiakkaat per‰‰n lis‰ttiin/* viittaa alikansioihin, mutta miksi ohjevideolla ei ole k‰yty t‰t‰ l‰pi
+@WebServlet("/asiakkaat/*") //frontEndiss‰ viitataan t‰h‰n kohtaan kun haetaan backEndist‰ tietoja 
 public class Asiakkaat extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	//T‰m‰ on backEndi‰
+	//T‰m‰ on servlet, joka keskustelee daon kanssa
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -37,22 +37,49 @@ public class Asiakkaat extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Asiakkaat.doGet()");
+		
+		String pathInfo = request.getPathInfo();	//haetaan kutsun polkutiedot, esim. /aalto			
+		System.out.println("polku: "+pathInfo);	
+		String hakusana="";
+		if(pathInfo!=null) {		
+		hakusana = pathInfo.replace("/", "");//korvataan pathInfo hakusanalla, esim. aalto (?)
+		}
 		Dao dao = new Dao();
-		ArrayList<Asiakas> asiakkaat = dao.listaaKaikki();
-		System.out.println(asiakkaat);
+		ArrayList<Asiakas> asiakkaat = dao.listaaKaikki(hakusana);
+		System.out.println(asiakkaat); //System.out.print tulostaa konsoliin
 		String strJSON = new JSONObject().put("asiakkaat", asiakkaat).toString();
 		response.setContentType("application/json"); //t‰ss‰ m‰‰ritell‰‰n sen kirjoituksen, joka tullaan kirjoittamaan, tyypiksi ("application/json");
 		PrintWriter out = response.getWriter(); // PrintWriter, jonka nimi on out
-		out.println(strJSON); // t‰ss‰ tulostetaan ulos (strJSON)
-		
-	}
+		out.println(strJSON); // t‰ss‰ tulostetaan ulos (strJSON) selaimeen
+		}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Asiakkaat.doPost()");
+		JSONObject jsonObj= new JsonStrToObj().convert(request); // otetaan tietoa vastaan JSONOBJECT luokan
+		//avulla. Ottaa vastaan kaikki kutsun mukana tulevat json Stringit ja muuttaa ne json objekteiksi
+		//kun tieto on json objektina silt‰ voidaan lukea suoraan arvoja
+		Asiakas asiakas = new Asiakas();
+		asiakas.setAsiakas_id(jsonObj.getInt("asiakas_id")); // tietokannassa on p‰‰ll‰ autoincrement, mutta siit‰ huolimatta, jos ei muuta myˆs asiakas_id:t‰, niin ei anna lis‰t‰???
+		asiakas.setEtunimi(jsonObj.getString("etunimi"));
+		asiakas.setSukunimi(jsonObj.getString("sukunimi"));
+		asiakas.setPuhelin(jsonObj.getString("puhelin"));
+		asiakas.setSposti(jsonObj.getString("sposti"));
 		
+		
+		response.setContentType("application/json"); //t‰ss‰ m‰‰ritell‰‰n sen kirjoituksen, joka tullaan kirjoittamaan, tyypiksi ("application/json");
+		PrintWriter out = response.getWriter(); // PrintWriter, jonka nimi on out
+		
+		Dao dao = new Dao();
+		if(dao.lisaaAsiakas(asiakas)) { //Huom! metodi palauttaa true tai false arvon
+			out.println("{\"response\":1}"); //1= aiakkaan lis‰‰minen onnistui
+		}
+		else {
+			out.println("{\"response\":0}"); // 0= asiakkaan lis‰‰‰minen ep‰onnistui
+		}
 	}
 
 	/**
@@ -67,6 +94,21 @@ public class Asiakkaat extends HttpServlet {
 	 */
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Asiakkaat.doDelete()");
+		String pathInfo = request.getPathInfo();	//haetaan kutsun polkutiedot, esim. /aalto			
+		System.out.println("polku: "+pathInfo);	
+		
+			
+		String poistettava = pathInfo.replace("/", "");//pit‰iskˆh‰n t‰ss‰ muuttaa int asiakas_id jotenkin Stringiksi?
+		
+		response.setContentType("application/json"); //t‰ss‰ m‰‰ritell‰‰n sen kirjoituksen, joka tullaan kirjoittamaan, tyypiksi ("application/json");
+		PrintWriter out = response.getWriter(); // PrintWriter, jonka nimi on out
+		Dao dao = new Dao();
+		if(dao.poistaAsiakas(poistettava)) { //Huom! metodi palauttaa true tai false arvon
+			out.println("{\"response\":1}"); //1= aiakkaan poistaminen onnistui
+		}
+		else {
+			out.println("{\"response\":0}"); // 0= asiakkaan poistaminen ep‰onnistui
+		}
 	}
 
 }

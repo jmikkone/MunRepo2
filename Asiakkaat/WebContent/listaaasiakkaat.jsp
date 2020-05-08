@@ -33,7 +33,7 @@
 				<th>Sukunimi</th>
 				<th>Puhelin</th>
 				<th>Sposti</th>
-				<th></th>
+				<th>&nbsp;</th>
 			</tr>
 		</thead>
 	<tbody>
@@ -45,68 +45,65 @@
 //tää on FrontEnd
 
 
-$(document).ready(function() {
+$(document).ready(function(){ //mitä tämä funktio oikeastaan tekee?
 	
-	$(document.body).on("keydown", function(event){ //opettaja ei ole selittänyt tätä toimintoa ohjevideoilla. Ensimmäisen kerran käytiin tehtävä 4. vastausvideolla läpi??? 
-		if(event.which==13){ // enteriä painettu, ajetaan haku
-			haeTiedot();
+	$(document.body).on("keydown", function(event){  //event funktion toiminta??? Tutki.
+		if(event.which==13){ // enteriä painettu, ajetaan haku Tutki lisää event.which:iä. miksi ==13? Mistä tuo 13 tulee?
+			haeTiedot(); //kutsuu haeTiedot-metodia
 		}		
 	});
 	
-	$("#uusiAsiakas").click(function(){ //opettaja ei ole selittänyt tätä toimintoa ohjevideoilla. Ensimmäisen kerran käytiin tehtävä 4. vastausvideolla läpi???
-		document.location="lisaaasiakas.jsp";
+	$("#uusiAsiakas").click(function(){ //klikkaus funktio. Käsitellään id=uusiAsiakas
+		document.location="lisaaasiakas.jsp"; //klikkaamalla selaimessa kohtaa lisää uusi asiakas, siirrytään sivulle lisaaasiakas.jsp
 	});
 	
-	$("#hae").click(function(){ //opettaja ei ole selittänyt tätä toimintoa ohjevideoilla. Ensimmäisen kerran käytiin tehtävä 4. vastausvideolla läpi???
-		haeTiedot(); //huom! tämän tyyppiset komennot eivät kuuluneet orientaatio kurssiin
+	$("#hae").click(function(){ //tässä sama kuin ylempänä, mutta id=hae ja klikkaus kutsuu haeTiedot-metodia.
+		haeTiedot(); 
 	});
 										
-	$("#hakusana").focus(function (){ //viedään kursori hakusana-kenttään sivun latauksen yhteydessä
-		 //opettaja ei ole selittänyt tätä toimintoa ohjevideoilla. Ensimmäisen kerran käytiin tehtävä 4. vastausvideolla läpi???
+	$("#hakusana").focus(); //viedään kursori hakusana-kenttään sivun latauksen yhteydessä
+	
+	haeTiedot();
+		
 	});
 	
 	function haeTiedot(){
-		$("#listaus tbody").empty();
-		$.getJSON({url:"asiakkaat/"+$("#hakusana").val(), //?????miksi tässä käytetäänkin $.getJSON, eikä $.ajax niinkuin aiemmin ohjevideossa "listaus" ja miksi asiakkaat jälkeen on /??? ei ollut videossa "listaus", mutta silti viikkotehtävä 4. vastaus videossa on???
-			type:"GET", 
-			datatype:"json", 
-			success: function(result){ //Funktio palauttaa tiedot json-objektina
+		$("#listaus tbody").empty(); //?????miksi tässä käytetäänkin $.getJSON, eikä $.ajax niinkuin aiemmin ohjevideossa "listaus"? Vastaus: molemmat käy.
+		$.getJSON({url:"asiakkaat/"+$("#hakusana").val(), type:"GET", datatype:"json", success: function(result){ //Funktio palauttaa tiedot json-objektina
 				
 				$.each(result.asiakkaat, function(i, field) {
 					var htmlStr;
-					htmlStr+="<tr id='rivi_"+field.asiakas_id+"''>";
+					htmlStr+="<tr id='rivi_"+field.asiakas_id+"'>";
 					htmlStr+="<td>"+field.asiakas_id+"</td>";
-					htmlStr+="<td>"+field.etunimi+"</td>";
+					htmlStr+="<td>"+field.etunimi+"</td>"; //field viittaa ilmeisesti? DB:n taulun tietokenttään x, esim. field.etunimi viittaa etunimi kenttään
 					htmlStr+="<td>"+field.sukunimi+"</td>";
 					htmlStr+="<td>"+field.puhelin+"</td>";
 					htmlStr+="<td>"+field.sposti+"</td>";
-					htmlStr+="<td><span class='poista', onclick=poista('"+field.asiakas_id+"')>Poista</span></td>";
+					htmlStr+="<td><span class='poista' onclick = poista("+field.asiakas_id+",'"+field.etunimi+"', '"+field.sukunimi+"')>Poista</span></td>";
 					htmlStr+="</tr>";
 					$("#listaus tbody").append(htmlStr);		
 			});
 			}
 		});
 	}
-});
-	function poista (asiakas_id){
+
+	function poista(asiakas_id, etunimi, sukunimi){ // functiolle välitetään parametrit asiakas_id, etunimi, sukunimi, jotka tulee field:stä?
 		
-		if (confirm("Poista asiakas " + asiakas_id+ "?")){
-			$.ajax({url:"asiakkaat/"+asiakas_id, type: "DELETE", datatype:"json", success: function (result){
+		if (confirm("Poista asiakas " + etunimi +" "+ sukunimi + "?")){ // confirm:lla luodaan  "kyllä/ei"-kysely laatikko selaimen puolelle?
+			$.ajax({url:"asiakkaat/"+asiakas_id, type: "DELETE", datatype:"json", success: function (result){ // ei tarvita=> var formJsonStr = formDataJsonStr($("#tiedot").serializeArray());, koska tiedot, jotka välitetään = simppelit, ei tarvi tehdä JsonObjektia!!! $.ajax({url: "TÄHÄN SERVLETIN NIMI, JOLLE TIEDOT VÄLITETÄÄN/"+TÄHÄN TIETO, JOKA VÄLITETÄÄN SERVLETILLE(tässä tiedon voi välittää suoraan, kun simppelissä muodossa jo valmiiksi. Siksi data:-kohta jää pois urlista), (eli tätä ei tässä tapauksessa tarvita=>data: TÄHÄN DATA, JOKA SERVLETILLE VÄLITETÄÄN(KTS. YLEMPI RIVI, JOSSA MUUTTUJAAN KIINNITETÄÄN KO.DATA)), type: "TÄHÄN, MILLE SERVLETIN METODILLE TIEDOT VÄLITETÄÄN (GET, POST, PUT, DELETE)"", datatype: TÄHÄN DATAN TYYPPI, MINKÄLAISENA TIEDOT SERVLETILLE VÄLITETÄÄN success: PALAUTTAA TULOKSEN (result) (MISTÄ, mikä funktio?), JOKO 1 TAI 0, RIIPPUEN ONNISTUIKO LISÄYS?  }) 
 				if (result.response==0){
 					$("#ilmo").html("Asiakkaan poisto epäonnistui.");
 				}
 				else if (result.response==1){
 					$("#rivi_"+asiakas_id).css("background-color", "red");
-					$("#ilmo").html("Asiakkaan" +asiakas_id+ " poisto onnistui.");
+					alert("Asiakkaan " + etunimi +" "+ sukunimi +" poisto onnistui.");
 					
-					haeTiedot;
+					haeTiedot();
 				}
-			}})
+			}});
+		
 		}
 	}
-	
-
 </script>
-
 </body>
 </html>

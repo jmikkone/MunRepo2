@@ -96,19 +96,18 @@ public class Dao {
 		return asiakkaat;
 	}
 	
-	public boolean lisaaAsiakas(Asiakas asiakas){
+	public boolean lisaaAsiakas(Asiakas asiakas){ //parametrin‰ tulee asiakas
 		boolean paluuArvo=true;
-		sql="INSERT INTO asiakkaat VALUES(?,?,?,?,?)";						  
+		sql="INSERT INTO asiakkaat (etunimi, sukunimi, puhelin, sposti) VALUES(?,?,?,?)";	//MUISTA! m‰‰rit‰ arvot, mit‰ lis‰‰t, jos et lis‰‰ arvoja kaikkiin (kyselyn kohteena olevan taulun) sarakkeisiin. Kuten t‰ss‰, kun ei lis‰t‰ arvoa AN kentt‰‰n, vaan etunimest‰ alkaen!!!					  
 		try {
 			con = yhdista();
 			stmtPrep=con.prepareStatement(sql);
-			stmtPrep.setInt(1, asiakas.getAsiakas_id());
-			stmtPrep.setString(2, asiakas.getEtunimi());
-			stmtPrep.setString(3, asiakas.getSukunimi());
-			stmtPrep.setString(4, asiakas.getPuhelin());
-			stmtPrep.setString(5, asiakas.getSposti());
+			stmtPrep.setString(1, asiakas.getEtunimi()); // t‰ss‰ luetaan parametrin‰ tulleen asiakkaan tiedot
+			stmtPrep.setString(2, asiakas.getSukunimi()); // tiedot asetetaan kysymysmerkkien kohdalle 1= eka ?=etunimi 2= toka?=sukunimi jne...
+			stmtPrep.setString(3, asiakas.getPuhelin());
+			stmtPrep.setString(4, asiakas.getSposti());
 			stmtPrep.executeUpdate();
-			
+			//System.out.println("Uusin id on "+ stmtPrep.getGeneratedKeys().getInt(1)); n‰in saa tiet‰‰ mik‰ on uusin id
 	        con.close();
 		} catch (Exception e) {				
 			e.printStackTrace();
@@ -117,14 +116,15 @@ public class Dao {
 		return paluuArvo;
 	}
 	
-	public boolean poistaAsiakas(String poistettava) {
+	public boolean poistaAsiakas(int asiakas_id) {
 		boolean paluuArvo=true;
 		sql="DELETE FROM asiakkaat WHERE asiakas_id=?";
 		try {
 			con = yhdista();
-			stmtPrep=con.prepareStatement(sql);
-			stmtPrep.setString(1, poistettava);
-			
+			stmtPrep=con.prepareStatement(sql); //t‰ss‰ "valmistellaan SQL-lauseke
+			stmtPrep.setInt(1, asiakas_id); // t‰ss‰ katenoidaan parametrin‰ tullut asiakas_id kiinni SQL-lauseen ?-merkkiin
+			stmtPrep.executeUpdate();		// MUISTA! t‰‰ pit‰‰ olla, koska executeUpdate suorittaa p‰ivityksen. Koodi ei tee mit‰‰n, jos t‰t‰ ei oo!!!
+			 //Huom! oikeasti ei poistella tietoja, vaan ne vain merkit‰‰n "poistetuksi" tietokannan taulussa olisi sarake, jossa arvo 1 tai 0, vertaa tuotteet continued kentt‰ Tietokannat kurssilla
 			con.close();
 	} catch (Exception e) {				
 		e.printStackTrace();

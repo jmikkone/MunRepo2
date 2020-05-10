@@ -132,5 +132,52 @@ public class Dao {
 	}				
 	return paluuArvo;
 }
-		
+	
+	public Asiakas etsiAsiakas(String asiakas_id) {
+		Asiakas asiakas = null;
+		sql = "SELECT * FROM asiakkaat WHERE asiakas_id = ?"; // haetaan kaikki asiakkaat taulusta kun asiakas_id on parametrina tullut asiakas_id
+		try {
+			con = yhdista();
+			if (con != null) {
+			stmtPrep = con.prepareStatement(sql); //t‰ss‰ "valmistellaan SQL-lauseke
+			stmtPrep.setString(1, asiakas_id); // t‰ss‰ katenoidaan parametrin‰ tullut asiakas_id kiinni SQL-lauseen ?-merkkiin
+			rs = stmtPrep.executeQuery();		// MUISTA! t‰‰ pit‰‰ olla, koska executeQuery suorittaa SQL-kyselyn.
+			if (rs.isBeforeFirst()) { 		//jos kysely tuotti dataa, eli asiakas_id on k‰ytˆss‰ // rs.isBeforeFirst => "kursori" on kytiksell‰ ennen ekaa datarivi‰
+				rs.next();
+				asiakas = new Asiakas(); //luodaan asiakas ja annetaan sille arvot
+				asiakas.setAsiakas_id(rs.getInt(1));
+				asiakas.setEtunimi(rs.getString(2));
+				asiakas.setSukunimi(rs.getString(3));
+				asiakas.setPuhelin(rs.getString(4));
+				asiakas.setSposti(rs.getString(5));	
+			}
+			}
+			con.close();
+	} catch (Exception e) {				
+		e.printStackTrace();
+		}				
+	return asiakas;
+	}
+	
+	public boolean muutaAsiakas(Asiakas asiakas, int asiakas_id) {
+		boolean paluuArvo = true;
+		sql = "UPDATE asiakkaat SET etunimi=?, sukunimi=?, puhelin=?, sposti=? WHERE asiakas_id=?";
+		try {
+			con = yhdista();
+			stmtPrep = con.prepareStatement(sql);
+			
+			stmtPrep.setString(1, asiakas.getEtunimi()); // t‰ss‰ luetaan parametrin‰ tulleen asiakkaan tiedot
+			stmtPrep.setString(2, asiakas.getSukunimi()); // tiedot asetetaan kysymysmerkkien kohdalle 1= eka ?=etunimi 2= toka?=sukunimi jne...
+			stmtPrep.setString(3, asiakas.getPuhelin());
+			stmtPrep.setString(4, asiakas.getSposti());
+			stmtPrep.setInt(5, asiakas_id);
+			stmtPrep.executeUpdate();
+			//System.out.println("Uusin id on "+ stmtPrep.getGeneratedKeys().getInt(1)); n‰in saa tiet‰‰ mik‰ on uusin id
+	        con.close();
+		} catch (Exception e) {				
+			e.printStackTrace();
+			paluuArvo=false;
+		}				
+		return paluuArvo;
+	}
 }

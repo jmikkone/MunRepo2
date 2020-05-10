@@ -15,7 +15,7 @@
 	<table>
 		<thead>	
 			<tr>
-				<th colspan="4" class="oikealle"><span id="takaisin">Takaisin listaukseen</span></th>
+				<th colspan="5" class="oikealle"><span id="takaisin">Takaisin listaukseen</span></th>
 			</tr>		
 			<tr>
 				<th>Etunimi</th>

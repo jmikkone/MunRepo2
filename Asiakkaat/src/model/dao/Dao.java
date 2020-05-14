@@ -133,23 +133,25 @@ public class Dao {
 	return paluuArvo;
 }
 	
-	public Asiakas etsiAsiakas(String asiakas_id) {
+	public Asiakas etsiAsiakas(String asiakas_id) {  //public Asiakas etsiasiakas(int asiakas_id) jos olisin muuttanut servletistä tulevan arvon intiksi
 		Asiakas asiakas = null;
 		sql = "SELECT * FROM asiakkaat WHERE asiakas_id = ?"; // haetaan kaikki asiakkaat taulusta kun asiakas_id on parametrina tullut asiakas_id
 		try {
 			con = yhdista();
 			if (con != null) {
 			stmtPrep = con.prepareStatement(sql); //tässä "valmistellaan SQL-lauseke
-			stmtPrep.setString(1, asiakas_id); // tässä katenoidaan parametrinä tullut asiakas_id kiinni SQL-lauseen ?-merkkiin
+			stmtPrep.setString(1, asiakas_id); // tässä katenoidaan parametrinä tullut asiakas_id kiinni SQL-lauseen ?-merkkiin //stmtPrep.setInt(1, asiakas_id); jos olisin muuttanut servletistä tulevan arvon intiksi
 			rs = stmtPrep.executeQuery();		// MUISTA! tää pitää olla, koska executeQuery suorittaa SQL-kyselyn.
 			if (rs.isBeforeFirst()) { 		//jos kysely tuotti dataa, eli asiakas_id on käytössä // rs.isBeforeFirst => "kursori" on kytiksellä ennen ekaa datariviä
 				rs.next();
 				asiakas = new Asiakas(); //luodaan asiakas ja annetaan sille arvot
-				asiakas.setAsiakas_id(rs.getInt(1));
+				asiakas.setAsiakas_id(rs.getInt(1));  //huomio hyväksyi suoraan tähän int arvon vaikka servlettiin otin vastaan asiakas_id:n stringinä, enkä siellä muuttanut sitä intiksi???
 				asiakas.setEtunimi(rs.getString(2));
 				asiakas.setSukunimi(rs.getString(3));
 				asiakas.setPuhelin(rs.getString(4));
 				asiakas.setSposti(rs.getString(5));	
+				
+				// uuden asiakkaan voi luoda myös näin asiakas= new Asiakas(rs.getInt("asiakas_id"), rs.getString("etunimi"), rs.getString("sukunimi"), rs.getString("puhelin"), rs.getString("sposti"));
 			}
 			}
 			con.close();
@@ -159,7 +161,7 @@ public class Dao {
 	return asiakas;
 	}
 	
-	public boolean muutaAsiakas(Asiakas asiakas, int asiakas_id) {
+	public boolean muutaAsiakas(Asiakas asiakas, int asiakas_id) { // voi olla myös näin jos servletin doPutista välitetään vain asiakas objekti parametrina public boolean muutaAsiakas(Asiakas asiakas) {
 		boolean paluuArvo = true;
 		sql = "UPDATE asiakkaat SET etunimi=?, sukunimi=?, puhelin=?, sposti=? WHERE asiakas_id=?";
 		try {
@@ -170,7 +172,7 @@ public class Dao {
 			stmtPrep.setString(2, asiakas.getSukunimi()); // tiedot asetetaan kysymysmerkkien kohdalle 1= eka ?=etunimi 2= toka?=sukunimi jne...
 			stmtPrep.setString(3, asiakas.getPuhelin());
 			stmtPrep.setString(4, asiakas.getSposti());
-			stmtPrep.setInt(5, asiakas_id);
+			stmtPrep.setInt(5, asiakas_id);  //jos servletista ei välitetä asiakas_id:ta parametrina niin, stmtPrep.setInt(5, asiakas.getAsiakas_id());
 			stmtPrep.executeUpdate();
 			//System.out.println("Uusin id on "+ stmtPrep.getGeneratedKeys().getInt(1)); näin saa tietää mikä on uusin id
 	        con.close();

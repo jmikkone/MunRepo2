@@ -41,6 +41,7 @@ public class Asiakkaat extends HttpServlet {
 		String pathInfo = request.getPathInfo();	//haetaan kutsun polkutiedot, esim. /aalto			
 		System.out.println("polku: "+pathInfo);
 		
+		
 		Dao dao = new Dao();
 		ArrayList<Asiakas> asiakkaat;
 		String strJSON="";					// jos kutsutaan backEndi‰ ilman kauttaviivaa, polku(pathInfo)=null;
@@ -51,13 +52,16 @@ public class Asiakkaat extends HttpServlet {
 		}
 		else if (pathInfo.indexOf("haeyksi")!=-1) { // jos polussa on mukana "haeyksi" k‰yttˆˆn otetaan t‰m‰ ehto // idexOf:lla haetaan merkki' tai merkkijonoa toisen merkkijonon sis‰ll‰ eli jos polku sis‰lt‰‰ merkkijonon "haeyksi", niin silloin k‰ettˆˆn otetaan t‰m‰ ehto ja haetaan yksi asiakas, se asiakas, jonka asiakas_id t‰h‰n napataan muutaAsiakas.jsp:st‰
 			
-			String asiakas_id = pathInfo.replace("/haeyksi/", ""); // t‰ss‰ napataan kiinni asiakas_id:n, parseroidaan se int arvoksi ja poistetaan polusta /haeyksi/ n‰m‰ merkit ja korvataan ne "" (tyhj‰ll‰), niin j‰ljelle j‰‰ vain asiakas_id
+			String asiakas_id = pathInfo.replace("/haeyksi/", ""); // t‰ss‰ napataan kiinni asiakas_id:n, parseroidaan se int arvoksi int asiakas_id=Integer.parseInt(pathInfo.replace("/haeyksi/", "")); ja poistetaan polusta /haeyksi/ n‰m‰ merkit ja korvataan ne "" (tyhj‰ll‰), niin j‰ljelle j‰‰ vain asiakas_id
+			//huomio vaikka en muuttanut String asiakas_id:t‰ intiksi, koodi hyv‰ksyi sen silti. Johtuukohan siit‰, ett‰ JSONStringin‰ tulleet tiedot on muutettu JSONObjektiksi ja JSONObjektilta voi lukea arvot suoraan?
+			// toisaalta t‰ss‰ kohtaa en kyll‰ ole luonut JsonObjektia ja l‰het‰n asiakas_id:n dao:n stringin‰. Miksi dao hyv‰ksyy sen kun luon uutta asiakasta: asiakas = new Asiakas(); asiakas.setAsiakas_id(rs.getInt(1)); Huom! getInt???
+			// mit‰h‰n seurauksia t‰ll‰ voi olla??? ja miksi sain koodin ylip‰‰t‰‰n n‰in toimimaan, ilman String=>int muutosta???
 			Asiakas asiakas = dao.etsiAsiakas(asiakas_id); // luodaan asiakas objekti ja kutsutaan dao:n etsiAsiakas-metodia ja v‰litet‰‰n sille parametrin‰ asiakas_id
-			if(asiakas==null) {
+			if(asiakas==null) { //jos dao:lle v‰litetty uusi asiakas (objekti) palauttaa null...
 				strJSON = "{}";
 			}
 			else {
-			JSONObject JSON = new JSONObject(); // luodaan uusi json objekti
+			JSONObject JSON = new JSONObject(); // luodaan uusi json objekti 
 			JSON.put("asiakas_id", asiakas.getAsiakas_id());
 			JSON.put("etunimi", asiakas.getEtunimi());		//put:lla vied‰‰n tiedot JSON objektiin
 			JSON.put("sukunimi", asiakas.getSukunimi());
@@ -124,7 +128,8 @@ public class Asiakkaat extends HttpServlet {
 		Asiakas asiakas = new Asiakas(); // t‰ss‰ luodaan uusi asiakas Asiakas luokan parametrittˆm‰n konstruktorin avulla
 		//asiakas.setAsiakas_id(jsonObj.getInt("asiakas_id")); // tietokannassa on p‰‰ll‰ autoincrement, mutta siit‰ huolimatta, jos ei muuta myˆs asiakas_id:t‰, niin ei anna lis‰t‰???
 		//daossa pit‰‰ muistaa m‰‰ritt‰‰ mitk‰ arvot haluaa lis‰t‰, jos ei lis‰‰ kaikkia, siksi ignoorasi AN:n!!!
-		asiakas.setAsiakas_id(asiakas_id);
+		asiakas.setAsiakas_id(asiakas_id);  //teht‰v‰n vastauksessa oli n‰in asiakas.setAsiakas_id(integer.parseInt(jsonObj.getString("asiakas_id))); Onko parserointi tarpeellinen, jos kerta jsonObjektilta voi lukea suoraan arvoja???
+		// olisi varmaan voinut tehd‰ suoraan n‰inkin asiakas.setAsiakas(jsonObj.getInt("asiakas_id");, jos kerran suostuu lukemaan jsonOjektista arvot suoraan???
 		asiakas.setEtunimi(jsonObj.getString("etunimi")); // t‰ss‰ asetetaan k‰ytt‰j‰n antamat arvot parametrittˆm‰‰n konstruktoriin
 		asiakas.setSukunimi(jsonObj.getString("sukunimi")); //jotka luetaan json objektiksi muutetusta json stringist‰
 		asiakas.setPuhelin(jsonObj.getString("puhelin"));
@@ -135,7 +140,7 @@ public class Asiakkaat extends HttpServlet {
 		PrintWriter out = response.getWriter(); // PrintWriter, jonka nimi on out
 		
 		Dao dao = new Dao();
-		if(dao.muutaAsiakas(asiakas, asiakas_id)) { //Huom! metodi palauttaa true tai false arvon
+		if(dao.muutaAsiakas(asiakas, asiakas_id)) { //Huom! metodi palauttaa true tai false arvon voisi olla myˆs n‰in if(dao.muutaAsiakas(asiakas)) { ei tarvi erikseen v‰litt‰‰ en‰‰ asiakas_id parametria, huomioi muutokset dao muutaAsiakas metodissa
 			out.println("{\"response\":1}"); //1= aiakkaan lis‰‰minen onnistui
 		}
 		else {

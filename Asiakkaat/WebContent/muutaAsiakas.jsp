@@ -15,20 +15,20 @@
 	<table>
 		<thead>	
 			<tr>
-				<th colspan="6" class="oikealle"><span id="takaisin">Takaisin listaukseen</span></th> <!-- tässä oleva span voisi olla suoraan <a href="listaaasiakkaat.jsp"></a> (nyt en ole ihan varma tuleeko ympärille tupsut vai hipsut) mutta, jos on a tagissa linkki, niin ei tarvitse scriptissä ottaa kiinni $("#takaisin).click(function(){ document.location="listaaasiakkaat.jsp"; -->
+				<th colspan="5" class="oikealle"><span id="takaisin">Takaisin listaukseen</span></th> <!-- tässä oleva span voisi olla suoraan <a href="listaaasiakkaat.jsp"></a> (nyt en ole ihan varma tuleeko ympärille tupsut vai hipsut) mutta, jos on a tagissa linkki, niin ei tarvitse scriptissä ottaa kiinni $("#takaisin).click(function(){ document.location="listaaasiakkaat.jsp"; -->
 			</tr>		
 			<tr>
-				<th>Asiakas_id</th>
+				
 				<th>Etunimi</th>
 				<th>Sukunimi</th>
 				<th>Puhelin</th>
 				<th>Sposti</th>
-				<th></th>
+				<th>Hallinta</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
-				<td><input type="text" name="asiakas_id" id="asiakas_id"></td>
+				
 				<td><input type="text" name="etunimi" id="etunimi"></td>
 				<td><input type="text" name="sukunimi" id="sukunimi"></td>
 				<td><input type="text" name="puhelin" id="puhelin"></td>
@@ -51,9 +51,9 @@ $ (document).ready(function(){ //jqueryn aloitus tagi = $ (document).ready(funct
 	var asiakas_id=requestURLParam("asiakas_id");
 	$.ajax({url:"asiakkaat/haeyksi/"+asiakas_id, type:"GET", dataType:"json", success: function(result){ // eli haetaan GET:llä ja se mitä GET-metodi palauttaa asettuu result:iin
 		//$("#id").val(result.asiakas_id); // vanha ja uusi asiakas_id saa aluksi saman arvon, jos id:tä muutettaisiin
-		$("#asiakas_id").val(result.asiakas_id);
-		$("#etunimi").val(result.etunimi);
-		$("#sukunimi").val(result.sukunimi);
+		$("#asiakas_id").val(result.asiakas_id); // tässä puretaan haetut tiedot lomakkeen kenttiin 
+		$("#etunimi").val(result.etunimi);		// $("kentän nimi =esim. #asiakas_id").val(result.kentän id=esim.asiakas_id);
+		$("#sukunimi").val(result.sukunimi);	//resul.kentän id hakee tuloksen joka asettuu lomakkeen #kentän nimi kohtaan?
 		$("#puhelin").val(result.puhelin);
 		$("#sposti").val(result.sposti);
 	}});
@@ -61,10 +61,7 @@ $ (document).ready(function(){ //jqueryn aloitus tagi = $ (document).ready(funct
 	$("#tiedot").validate({			//arvojen validointi			
 		rules: {					//validoinnin säännöt
 			
-			asiakas_id: {
-				required: true,
-				minlength: 1
-			},
+			
 		
 			etunimi:  {				//kertoo mikä arvo validoidaan ja millä säännöillä
 				required: true,		//true määrittelee, että kentässä on oltava jotain/joku arvo
@@ -85,10 +82,7 @@ $ (document).ready(function(){ //jqueryn aloitus tagi = $ (document).ready(funct
 		},
 		messages: {					//jos säännöt ei toteudu
 			
-			asiakas_id: {
-				required: "Puuttuu",
-				minlength: "Liian lyhyt"
-			},
+			
 			etunimi: {     
 				required: "Puuttuu",		//kirjoittaa selaimeen arvokentän kohdalle mitä lainausmerkkien sisällä on
 				minlength: "Liian lyhyt"			
@@ -117,6 +111,7 @@ $ (document).ready(function(){ //jqueryn aloitus tagi = $ (document).ready(funct
 function paivitaTiedot(){	
 	var formJsonStr = formDataJsonStr($("#tiedot").serializeArray()); //muutetaan lomakkeen tiedot json-stringiksi formJsonDataStr=metodi, joka muuttaa tiedot json stringiksi, #tiedot=lomakkeen (jonka tiedot muutetaan) id, serializeArray=metodi,joka järjestelee lomakkeen tiedot arvopareiksi? Arraylistaan?
 	$.ajax({url:"asiakkaat", data:formJsonStr, type:"PUT", dataType:"json", success:function(result) { //result on joko {"response:1"} tai {"response:0"} $.ajax({url: "TÄHÄN SERVLETIN NIMI, JOLLE TIEDOT VÄLITETÄÄN", data: TÄHÄN DATA, JOKA SERVLETILLE VÄLITETÄÄN(KTS. YLEMPI RIVI, JOSSA MUUTTUJAAN KIINNITETÄÄN KO.DATA), type: "TÄHÄN, MILLE SERVLETIN METODILLE TIEDOT VÄLITETÄÄN (GET, POST, PUT, DELETE)"", datatype: TÄHÄN DATAN TYYPPI, MINKÄLAISENA TIEDOT SERVLETILLE VÄLITETÄÄN success: PALAUTTAA TULOKSEN (result) (MISTÄ, mikä funktio?), JOKO 1 TAI 0, RIIPPUEN ONNISTUIKO LISÄYS?  })      
+														// miksi tässä ei ole dataType:"json" pakollinen? tehtävän vastauksessa ei ollut dataTypea?
 		if(result.response==0){
       	$("#ilmo").html("Asiakkaan päivittäminen epäonnistui."); // #ilmo= id, sille kohdalle koodissa, johon kirjoitetaan viesti
       }else if(result.response==1){			
